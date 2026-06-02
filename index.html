@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rose Baghdad | دار روز بغداد للعطور الفاخرة والبخور</title>
+  <meta name="description" content="دار روز بغداد للعطور الفاخرة والبخور — تجربة استثنائية من قلب بغداد. عطور وبخور تليق بأصحاب الذوق الرفيع منذ عام ٢٠٢٢.">
+  <meta name="keywords" content="عطور فاخرة, بخور, روز بغداد, Rose Baghdad, عود, مسك, هدايا فاخرة, عراق">
+  <meta name="author" content="Rose Baghdad">
+  <meta property="og:title" content="Rose Baghdad | دار روز بغداد">
+  <meta property="og:description" content="حيث يغدو العطر فناً أصيلاً — دار روز بغداد للعطور الفاخرة والبخور.">
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              DEFAULT: '#D4AF37',
+              light:   '#F5E27A',
+              dark:    '#9A7B1A',
+            }
+          },
+          fontFamily: {
+            'serif-ar': ['Amiri', 'Georgia', 'serif'],
+            'serif-en': ['Cormorant Garamond', 'Playfair Display', 'Georgia', 'serif'],
+            'sans-ar':  ['Tajawal', 'sans-serif'],
+            'sans-en':  ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="shared.css">
+</head>
+
+<body class="bg-midnight text-[var(--cream-white)] antialiased">
+
+  <!-- ═══════════════════════════════════════════════
+       ANNOUNCEMENT BAR
+  ═══════════════════════════════════════════════ -->
+  <div class="announcement-bar">
+    <p class="text-[10px] font-semibold tracking-[0.2em] uppercase text-gray-400">
+      <i class="ri-vip-crown-fill text-gold mr-2 text-xs"></i>
+      <span data-i18n="announcementText">توصيل ملكي فاخر ومؤمن بالكامل لجميع المحافظات العراقية</span>
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION — Fixed / Glass on Scroll
+  ═══════════════════════════════════════════════ -->
+  <header id="mainNav" class="nav-root">
+    <div class="max-w-screen-xl mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#" data-route="home" class="flex-shrink-0">
+        <img src="lv_0_.png" alt="Rose Baghdad" class="h-14 w-auto object-contain transition-transform duration-700 hover:scale-105 select-none">
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-10">
+        <a href="#" data-route="home"        class="nav-link" data-i18n="navHome">الرئيسية</a>
+        <a href="#" data-route="collections" class="nav-link" data-i18n="navCollections">المجموعة الكاملة</a>
+        <a href="#" data-route="story"       class="nav-link" data-i18n="navStory">قصتنا</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-6">
+        <!-- Language Toggle -->
+        <button id="langToggle"
+          class="flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] uppercase text-gray-400 hover:text-[#D4AF37] transition-colors duration-300 border border-white/[0.08] hover:border-gold/30 px-4 py-2 rounded-full">
+          <i class="ri-translate-2 text-sm text-gold"></i>
+          <span id="langToggleText">EN</span>
+        </button>
+
+        <!-- Cart -->
+        <button id="openCartBtn" class="relative group">
+          <i class="ri-shopping-bag-line text-2xl text-white/80 group-hover:text-[#D4AF37] transition-colors duration-300"></i>
+          <span id="cartBadge"
+            class="cart-badge absolute -top-1.5 -right-1.5 bg-gold text-black text-[9px] font-bold min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">
+            0
+          </span>
+        </button>
+
+        <!-- Mobile Hamburger -->
+        <button id="mobileMenuBtn" class="md:hidden text-white/80 hover:text-gold transition-colors">
+          <i class="ri-menu-3-line text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       MOBILE MENU
+  ═══════════════════════════════════════════════ -->
+  <div id="mobileMenu"
+    class="hidden fixed inset-0 z-[150] bg-midnight/98 backdrop-blur-xl flex flex-col items-center justify-center gap-10 text-center">
+    <button id="closeMobileMenu" class="absolute top-6 right-6 text-white/50 hover:text-gold transition-colors text-3xl">
+      <i class="ri-close-line"></i>
+    </button>
+    <img src="lv_0_.png" alt="Rose Baghdad" class="h-16 w-auto object-contain opacity-60 select-none mb-4">
+    <a href="#" data-route="home"        class="text-2xl font-serif-ar text-white hover:text-gold transition-colors" onclick="closeMobile()" data-i18n="navHome">الرئيسية</a>
+    <a href="#" data-route="collections" class="text-2xl font-serif-ar text-white hover:text-gold transition-colors" onclick="closeMobile()" data-i18n="navCollections">المجموعة الكاملة</a>
+    <a href="#" data-route="story"       class="text-2xl font-serif-ar text-white hover:text-gold transition-colors" onclick="closeMobile()" data-i18n="navStory">قصتنا</a>
+    <a href="#" data-route="checkout"    class="text-2xl font-serif-ar text-white hover:text-gold transition-colors" onclick="closeMobile()" data-i18n="navCheckout">إتمام الطلب</a>
+    <div class="divider-gold w-16"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       CART OVERLAY
+  ═══════════════════════════════════════════════ -->
+  <div id="cartOverlay" class="cart-overlay"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       CART DRAWER
+  ═══════════════════════════════════════════════ -->
+  <aside id="cartDrawer" class="cart-drawer">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between px-8 py-6 border-b border-white/[0.04] flex-shrink-0">
+      <div class="flex items-center gap-3">
+        <i class="ri-vip-crown-2-line text-gold text-lg"></i>
+        <h2 class="text-sm font-bold tracking-[0.15em] uppercase" data-i18n="cartTitle">سلة المقتنيات الملكية</h2>
+      </div>
+      <button id="closeCartBtn" class="text-white/40 hover:text-white transition-colors text-2xl leading-none">
+        <i class="ri-close-line"></i>
+      </button>
+    </div>
+
+    <!-- Cart Items -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto px-8 py-4 hide-scrollbar">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Cart Footer -->
+    <div class="px-8 py-6 border-t border-white/[0.04] flex-shrink-0 space-y-4 bg-midnight/60">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-gray-400 uppercase tracking-wider" data-i18n="cartSubtotal">المجموع الفرعي</span>
+        <span id="cartSubtotalDisplay" class="text-white font-semibold">—</span>
+      </div>
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-gray-400 uppercase tracking-wider" data-i18n="cartShipping">الشحن الملكي</span>
+        <span class="text-gold font-bold uppercase tracking-wider text-[10px]" data-i18n="cartFree">مجاني ومؤمن</span>
+      </div>
+      <div class="divider-gold"></div>
+      <div class="flex justify-between items-center">
+        <span class="text-xs text-gray-300 uppercase tracking-wider" data-i18n="cartTotal">الإجمالي</span>
+        <span id="cartTotalDisplay" class="text-xl font-bold text-gold">—</span>
+      </div>
+      <a href="#" data-route="checkout"
+        class="btn-hero w-full justify-center text-center mt-2 block"
+        onclick="closeCart()"
+        data-i18n="cartCheckoutBtn">
+        إتمام الطلب الملكي
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN — SPA PAGES CONTAINER
+  ═══════════════════════════════════════════════ -->
+  <main id="appRoot">
+
+    <!-- ─────────────────────────────────────────
+         HOME PAGE
+    ───────────────────────────────────────── -->
+    <div id="view-home" class="page-view active">
+
+      <!-- ══ 1. CINEMATIC HERO ══ -->
+      <section class="hero-root pt-24 bg-midnight">
+        <!-- Ambient glow behind the scene -->
+        <div class="ambient-hero"></div>
+
+        <!-- Main hero grid - Wide open air layout -->
+        <div class="relative z-10 w-full max-w-screen-2xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-20 lg:py-0 min-h-[90vh]">
+
+          <!-- Left: Floating Text -->
+          <div class="flex flex-col gap-8 order-2 lg:order-1 ml-0 lg:ml-10">
+            <!-- Eyebrow -->
+            <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold opacity-80" data-i18n="heroSubtitle">
+              تأسست عام ٢٠٢٢ — رمز الرقي والأصالة
+            </p>
+
+            <!-- Main Heading -->
+            <h1 class="font-serif-ar text-5xl md:text-6xl lg:text-[4rem] xl:text-[5rem] leading-[1.2] text-white drop-shadow-2xl" data-i18n="heroTitle">
+              حيث يغدو<br>
+              <em class="not-italic gold-gradient-text text-gold">العطر</em><br>
+              فناً أصيلاً
+            </h1>
+
+            <!-- Gradient separator line -->
+            <div class="divider-gold w-24"></div>
+
+            <!-- Description -->
+            <p class="text-gray-400 text-base leading-relaxed max-w-lg" data-i18n="heroDesc">
+              نصنع من أجود المكونات الطبيعية والزيوت النادرة عطوراً وبخوراً تليق بأصحاب الذوق الرفيع. تجربة فريدة من نوعها من قلب بغداد العريقة.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-6 mt-6">
+              <a href="#" data-route="collections" class="btn-hero" data-i18n="heroCTA">
+                اكتشف المجموعة
+                <i class="ri-arrow-left-line text-lg"></i>
+              </a>
+              <a href="#" data-route="story" class="btn-ghost" data-i18n="navStory">
+                قصتنا
+              </a>
+            </div>
+
+            <!-- Stats Strip -->
+            <div class="flex gap-12 mt-12 pt-8 border-t border-white/[0.05]">
+              <div>
+                <p class="text-3xl font-bold text-white">+٢٠٠</p>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-2" data-i18n="statProducts">تركيبة فريدة</p>
+              </div>
+              <div>
+                <p class="text-3xl font-bold text-white">٥ <span class="text-gold text-2xl">★</span></p>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-2" data-i18n="statRating">تقييم العملاء</p>
+              </div>
+              <div>
+                <p class="text-3xl font-bold text-white">٢٠٢٢</p>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-2" data-i18n="statYear">سنة التأسيس</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Floating Transparent PNG Product - Open Air Layout -->
+          <div class="relative flex items-center justify-center order-1 lg:order-2 select-none h-[60vh] lg:h-[80vh]">
+            <!-- Massive ambient glow behind the bottle -->
+            <div class="absolute w-[500px] h-[500px] rounded-full"
+              style="background: radial-gradient(ellipse at center, rgba(197,160,89,0.15) 0%, rgba(212,175,55,0.05) 40%, transparent 70%); filter: blur(50px);">
+            </div>
+            <!-- Main hero product -->
+            <div class="relative z-10 w-full h-full flex items-center justify-center">
+              <img src="The visual identity of Rose Baghdad/Links/Parfume_02_03.png"
+                alt="Rose Baghdad Royal Elixir"
+                class="hero-product-float h-full w-auto object-contain max-h-[80%] drop-shadow-[0_50px_80px_rgba(0,0,0,0.9)]">
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom fade gradient -->
+        <div class="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+          style="background: linear-gradient(to bottom, transparent, var(--smoked-amber));">
+        </div>
+      </section>
+
+      <!-- ══ DYNAMIC CURATION BLOCK ══ -->
+      <section class="py-24 relative overflow-hidden bg-smoked">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 relative z-10">
+          <div class="text-center mb-16">
+            <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-4" data-i18n="dynamicEyebrow">اختيارات ملكية</p>
+            <h2 class="font-serif-ar text-3xl md:text-4xl text-white" data-i18n="dynamicTitle">اكتشف عوالم جديدة</h2>
+          </div>
+          
+          <div id="dynamicShowcaseContainer" class="dynamic-showcase flex flex-col md:flex-row items-center justify-center gap-12 max-w-4xl mx-auto bg-royal border border-white/[0.04] p-8 md:p-12 rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.5)] cursor-pointer hover:border-gold/30 transition-all duration-500">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ BEST-SELLERS SHOWROOM (AUTOPLAY SLIDER) ══ -->
+      <section class="py-32 relative overflow-hidden bg-midnight">
+        <div class="max-w-[1600px] mx-auto px-6 lg:px-12">
+
+          <!-- Header row -->
+          <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-20">
+            <div>
+              <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-3" data-i18n="bestSellersEyebrow">الأكثر طلباً</p>
+              <h2 class="font-serif-ar text-3xl md:text-4xl text-white" data-i18n="bestSellersTitle">الإصدارات الأكثر طلباً</h2>
+            </div>
+            <div class="flex items-center gap-4">
+              <!-- Indicators can go here or we keep it clean -->
+              <p class="text-xs text-gray-500 tracking-widest uppercase"><i class="ri-drag-move-fill align-middle mr-2"></i> <span data-i18n="dragToExplore">اسحب للاستكشاف</span></p>
+            </div>
+          </div>
+
+          <!-- Carousel track (Drag & Swipe + AutoPlay) -->
+          <div class="overflow-hidden -mx-6 px-6 pb-8">
+            <div id="bestSellersTrack" class="carousel-track">
+              <!-- JS populates product cards here -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ BRAND VALUES & STORY TEASER ══ -->
+      <section class="py-32 relative overflow-hidden bg-smoked">
+        <div class="ambient-right pointer-events-none"></div>
+
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+
+            <!-- Left: Overlapping image collage -->
+            <div class="relative h-[520px] md:h-[620px] order-2 lg:order-1 select-none">
+              <!-- Primary large image -->
+              <div class="absolute top-0 right-0 w-[72%] h-[75%] rounded-2xl overflow-hidden border border-white/[0.04]">
+                <img src="The visual identity of Rose Baghdad/Links/Parfume_02_04.png"
+                  alt="Rose Baghdad Elixir"
+                  class="story-img-primary w-full h-full object-cover">
+              </div>
+              <!-- Secondary overlapping image -->
+              <div class="absolute bottom-0 left-0 w-[55%] h-[55%] rounded-2xl overflow-hidden border border-white/[0.04] shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
+                <img src="The visual identity of Rose Baghdad/Links/Cosmetic Jar Mockup 05.png"
+                  alt="Rose Baghdad Incense"
+                  class="story-img-secondary w-full h-full object-cover">
+              </div>
+              <!-- Gold corner accent lines -->
+              <div class="absolute top-0 right-0 w-16 h-16 pointer-events-none">
+                <div class="absolute top-0 right-0 w-8 h-[1px] bg-gold opacity-40"></div>
+                <div class="absolute top-0 right-0 w-[1px] h-8 bg-gold opacity-40"></div>
+              </div>
+              <div class="absolute bottom-0 left-0 w-16 h-16 pointer-events-none">
+                <div class="absolute bottom-0 left-0 w-8 h-[1px] bg-gold opacity-40"></div>
+                <div class="absolute bottom-0 left-0 w-[1px] h-8 bg-gold opacity-40"></div>
+              </div>
+              <!-- Small floating accent number -->
+              <div class="absolute bottom-6 right-6 text-right pointer-events-none">
+                <p class="text-[10px] font-bold tracking-[0.3em] uppercase text-gold/50">EST. 2022</p>
+              </div>
+            </div>
+
+            <!-- Right: Brand Values -->
+            <div class="flex flex-col gap-8 order-1 lg:order-2">
+              <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold" data-i18n="storyEyebrow">قيمنا</p>
+              <h2 class="font-serif-ar text-3xl md:text-4xl lg:text-5xl text-white leading-tight drop-shadow-xl" data-i18n="storyTitle">
+                تراث يرويه<br>العطر
+              </h2>
+              <div class="divider-gold w-16"></div>
+              
+              <div class="flex flex-col gap-6 mt-4">
+                <div class="flex items-start gap-4">
+                  <i class="ri-award-fill text-gold text-2xl mt-1"></i>
+                  <div>
+                    <h4 class="text-white font-bold text-sm mb-1" data-i18n="value1Title">الحرفية البغدادية</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed" data-i18n="value1Desc">تعتيق يدوي ودمج بين تقنيات الماضي وحداثة الحاضر لتقديم تحف عطرية لا تضاهى.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <i class="ri-gemstone-fill text-gold text-2xl mt-1"></i>
+                  <div>
+                    <h4 class="text-white font-bold text-sm mb-1" data-i18n="value2Title">المكونات النادرة</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed" data-i18n="value2Desc">استخدام أجود أنواع العود الكمبودي والورد الدمشقي والطائفي بتركيزات عالية.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pull quote -->
+              <blockquote class="border-r-2 border-gold/30 pr-5 my-6">
+                <p class="font-serif-ar text-lg text-white/70 italic leading-relaxed" data-i18n="storyQuote">
+                  "العطر ليس مجرد رائحة، بل هو هوية وذاكرة وفن."
+                </p>
+              </blockquote>
+              <a href="#" data-route="story" class="btn-hero self-start" data-i18n="storyReadMore">
+                اقرأ القصة الكاملة
+                <i class="ri-arrow-left-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══ NEWSLETTER ══ -->
+      <section class="py-24 newsletter-wrap relative bg-royal border-t border-b border-white/[0.04]">
+        <div class="max-w-screen-xl mx-auto px-6 lg:px-12 relative z-10">
+          <div class="max-w-2xl mx-auto text-center">
+            <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-4" data-i18n="newsletterEyebrow">الدائرة الحصرية</p>
+            <h2 class="font-serif-ar text-3xl text-white mb-4" data-i18n="newsletterTitle">انضم إلى مجتمع روز بغداد</h2>
+            <p class="text-gray-500 text-sm mb-12" data-i18n="newsletterDesc">كن أول من يعلم بالإصدارات الحصرية والخصومات النادرة المخصصة لروادنا.</p>
+            <form id="newsletterForm" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+              <input type="email" required
+                class="luxury-input flex-1 rounded-full"
+                placeholder="بريدك الإلكتروني الملكي..."
+                data-i18n-placeholder="newsletterPlaceholder">
+              <button type="submit" class="btn-hero flex-shrink-0 px-8" data-i18n="newsletterBtn">
+                الاشتراك الملكي
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end view-home -->
+
+
+    <!-- ─────────────────────────────────────────
+         PDP (PRODUCT DETAIL PAGE) VIEW
+    ───────────────────────────────────────── -->
+    <div id="view-pdp" class="page-view hidden-view bg-midnight min-h-screen pt-32 pb-24">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-12">
+        
+        <button onclick="navigateTo('home')" class="text-gray-400 hover:text-gold transition-colors text-xs flex items-center gap-2 mb-12 uppercase tracking-widest font-bold">
+          <i class="ri-arrow-right-line"></i> <span data-i18n="backToHome">العودة</span>
+        </button>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          
+          <!-- Image Gallery -->
+          <div class="relative bg-royal rounded-3xl p-12 flex items-center justify-center border border-white/[0.03] shadow-[0_20px_50px_rgba(0,0,0,0.5)] h-[500px] lg:h-[700px]">
+            <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.05)_0%,transparent_60%)]"></div>
+            <img id="pdpImage" src="" alt="Product" class="w-full h-full object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.8)] relative z-10 transition-transform duration-700 hover:scale-105">
+          </div>
+
+          <!-- Product Info -->
+          <div class="flex flex-col gap-8">
+            <div>
+              <p id="pdpCategory" class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-4">الفئة</p>
+              <h1 id="pdpTitle" class="font-serif-ar text-4xl md:text-5xl text-white leading-tight drop-shadow-lg mb-6">اسم العطر</h1>
+              <div class="flex items-center gap-6 text-sm">
+                <div class="stars-gold flex gap-1" id="pdpStars"></div>
+                <span class="text-gray-500" id="pdpReviews">0 مراجعة</span>
+              </div>
+            </div>
+
+            <p id="pdpPrice" class="text-3xl font-bold text-cream-white tracking-wider">0 د.ع</p>
+            
+            <p id="pdpDesc" class="text-gray-400 text-sm leading-relaxed border-b border-white/[0.05] pb-8">الوصف</p>
+
+            <!-- Tabs -->
+            <div class="flex gap-8 border-b border-white/[0.05]">
+              <button class="pdp-tab-btn active" data-target="tab-notes" data-i18n="pdpTabNotes">المكونات العطرية</button>
+              <button class="pdp-tab-btn" data-target="tab-base" data-i18n="pdpTabBase">النوتات الأساسية</button>
+              <button class="pdp-tab-btn" data-target="tab-longevity" data-i18n="pdpTabLongevity">ثبات العطر</button>
+            </div>
+
+            <div class="relative min-h-[100px]">
+              <div id="tab-notes" class="pdp-tab-content active text-gray-400 text-xs leading-relaxed">
+                مزيج حصري يبدأ بنفحات البرغموت والزعفران، وينتقل ببطء إلى قلب من الورد الطائفي النادر، ليترك أثراً عميقاً من العود الكمبودي المعتق.
+              </div>
+              <div id="tab-base" class="pdp-tab-content text-gray-400 text-xs leading-relaxed">
+                قاعدة العطر ترتكز على أخشاب الصندل، المسك الأبيض، وقطرات من العنبر الدافئ الذي يمنح العطر شخصيته الملكية.
+              </div>
+              <div id="tab-longevity" class="pdp-tab-content text-gray-400 text-xs leading-relaxed">
+                يمتاز هذا الإصدار بتركيز عالٍ (Extrait de Parfum) يضمن ثباتاً يتجاوز الـ ٢٤ ساعة على البشرة ويدوم لأيام على الملابس.
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-6 mt-4">
+              <div class="flex items-center bg-royal border border-white/[0.08] rounded-full px-4 py-2 h-[56px]">
+                <button id="pdpQtyDec" class="text-white hover:text-gold w-8 h-8 flex items-center justify-center text-lg">−</button>
+                <span id="pdpQtyDisplay" class="text-white font-bold w-10 text-center">1</span>
+                <button id="pdpQtyInc" class="text-white hover:text-gold w-8 h-8 flex items-center justify-center text-lg">+</button>
+              </div>
+              <button id="pdpAddToCartBtn" class="btn-hero flex-1 h-[56px] text-sm">
+                <i class="ri-shopping-cart-2-line mr-2"></i> <span data-i18n="pdpAddToCart">إضافة للسلة الملكية</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ─────────────────────────────────────────
+         COLLECTIONS PAGE
+    ───────────────────────────────────────── -->
+    <div id="view-collections" class="page-view hidden-view bg-smoked min-h-screen">
+      <div class="pt-36 pb-24">
+
+        <!-- Page title -->
+        <div class="text-center mb-20 px-6">
+          <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-4">مجموعاتنا</p>
+          <h1 class="font-serif-ar text-4xl md:text-5xl text-white drop-shadow-xl mb-6" data-i18n="navCollections">المجموعة الكاملة</h1>
+          <div class="divider-short"></div>
+        </div>
+
+        <!-- Dynamic Category Sliders generated by JS -->
+        <div id="collectionsContainer" class="flex flex-col gap-24">
+          <!-- Filled by JS -->
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ─────────────────────────────────────────
+         OUR STORY PAGE
+    ───────────────────────────────────────── -->
+    <div id="view-story" class="page-view hidden-view bg-midnight">
+      <div class="max-w-screen-xl mx-auto px-6 lg:px-12 pt-36 pb-32">
+
+        <!-- Page Hero -->
+        <div class="max-w-3xl mx-auto text-center mb-32">
+          <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-6">منذ ٢٠٢٢</p>
+          <h1 class="font-serif-ar text-5xl md:text-6xl lg:text-7xl text-white leading-tight drop-shadow-2xl mb-8" data-i18n="storyTitle">
+            تراث يرويه<br><em class="not-italic gold-gradient-text text-gold">العطر</em>
+          </h1>
+          <div class="divider-short mb-10"></div>
+          <p class="text-gray-400 leading-relaxed" data-i18n="storySubtitle">
+            رحلتنا بدأت في عام ٢٠٢٢ من قلب بغداد الشامخة لتصنع رمزاً عطرياً جديداً يليق بالتراث ويتجاوز التوقعات.
+          </p>
+        </div>
+
+        <!-- Full cover image -->
+        <div class="w-full h-[400px] md:h-[560px] rounded-3xl overflow-hidden border border-white/[0.04] relative mb-32 select-none shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
+          <img src="The visual identity of Rose Baghdad/Links/Shopping Bag Mock-2up.png"
+            alt="Rose Baghdad Collection"
+            class="w-full h-full object-cover scale-[1.03] transition-transform duration-[2s] hover:scale-100">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-transparent"></div>
+          <div class="absolute bottom-10 right-10 text-right">
+            <p class="text-[10px] tracking-widest uppercase text-gold/60">Rose Baghdad</p>
+            <p class="font-serif-ar text-3xl text-white drop-shadow-xl mt-2">دار العطور الفاخرة</p>
+          </div>
+        </div>
+
+        <!-- Story body -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start mb-32">
+          <div class="flex flex-col gap-8">
+            <h2 class="font-serif-ar text-3xl text-white" data-i18n="storyCommitmentTitle">
+              التزامنا بالفخامة والتميز المطلق
+            </h2>
+            <div class="divider-gold w-16"></div>
+            <p class="text-gray-400 text-sm leading-relaxed" data-i18n="storyP1">
+              في قلب بغداد، حيث يلتقي التراث الشرقي العريق بروح الحداثة الأنيقة، ولدت علامة "روز بغداد" في عام ٢٠٢٢. لم نكن نسعى فقط لبيع العطور والبخور، بل كان طموحنا أن نلخص عمق الحضارة البغدادية ونقدمه كتحفة فنية فريدة تنافس أرقى بيوت العطور العالمية.
+            </p>
+            <p class="text-gray-400 text-sm leading-relaxed" data-i18n="storyP2">
+              كل قطرة عطر أو قطعة بخور ننتجها تمر بعملية تعتيق يدوي دقيقة تدوم لشهور. نحن نجوب العالم لجلب أنقى أنواع دهن العود الكمبودي، وأندر زيوت الورد الطائفي والدمشقي، لنخلطها بشغف وحرفية عالية.
+            </p>
+          </div>
+          <!-- Side image + quote -->
+          <div class="flex flex-col gap-10">
+            <div class="w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.04] select-none shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+              <img src="The visual identity of Rose Baghdad/Links/Parfume_02_03.png"
+                alt="Rose Baghdad Perfume"
+                class="w-full h-full object-cover story-img-primary">
+            </div>
+            <!-- Pull quote floating -->
+            <blockquote class="relative">
+              <span class="absolute -top-6 right-0 text-gold/10 font-serif-ar text-[5rem] leading-none select-none">"</span>
+              <p class="font-serif-ar text-xl text-white/80 italic leading-relaxed pr-4" data-i18n="storyQuote">
+                "العطر ليس مجرد رائحة جذابة، بل هو هوية شخصية وذكرى عريقة لا تموت أبداً."
+              </p>
+            </blockquote>
+            <p class="text-gray-500 text-xs leading-relaxed" data-i18n="storyCommitmentDesc">
+              تلتزم دار روز بغداد بتقديم أعلى مستويات الخدمة المخصصة لزبائننا المميزين، بدءاً من انتقاء المواد الخام ووصولاً إلى التوصيل الفاخر المجاني والتغليف الذي يليق بمقامكم.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ─────────────────────────────────────────
+         CHECKOUT PAGE
+    ───────────────────────────────────────── -->
+    <div id="view-checkout" class="page-view hidden-view bg-smoked">
+      <div class="max-w-screen-lg mx-auto px-6 lg:px-12 pt-36 pb-32">
+
+        <!-- Page title -->
+        <div class="text-center mb-20">
+          <p class="text-[10px] font-bold tracking-[0.35em] uppercase text-gold mb-4">إتمام الطلب</p>
+          <h1 class="font-serif-ar text-4xl text-white drop-shadow-xl mb-4" data-i18n="checkoutTitle">إتمام الطلب الملكي</h1>
+          <div class="divider-short"></div>
+        </div>
+
+        <form id="checkoutBillingForm" class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+          <!-- LEFT: Shipping details -->
+          <div class="flex flex-col gap-8 bg-midnight p-8 rounded-3xl border border-white/[0.02] shadow-2xl">
+            <h3 class="text-xs font-bold tracking-[0.2em] uppercase text-gold/70 border-b border-white/[0.04] pb-4" data-i18n="checkoutBillingDetails">
+              معلومات الشحن والتوصيل
+            </h3>
+
+            <div>
+              <label class="luxury-label" data-i18n="fullName">الاسم الكامل</label>
+              <input type="text" required class="luxury-input" data-i18n-placeholder="fullName" placeholder="الاسم الكامل للعميل">
+            </div>
+            <div>
+              <label class="luxury-label" data-i18n="phone">رقم الهاتف</label>
+              <input type="tel" required class="luxury-input" data-i18n-placeholder="phone" placeholder="رقم الهاتف الفعال">
+            </div>
+            <div>
+              <label class="luxury-label" data-i18n="city">المحافظة والمنطقة</label>
+              <input type="text" required class="luxury-input" data-i18n-placeholder="city" placeholder="المحافظة والمنطقة">
+            </div>
+            <div>
+              <label class="luxury-label" data-i18n="address">العنوان التفصيلي</label>
+              <input type="text" required class="luxury-input" data-i18n-placeholder="address" placeholder="العنوان التفصيلي">
+            </div>
+            <div>
+              <label class="luxury-label" data-i18n="deliveryNotes">ملاحظات التوصيل</label>
+              <textarea rows="3" class="luxury-input resize-none" data-i18n-placeholder="deliveryNotes" placeholder="أي ملاحظات خاصة للتوصيل..."></textarea>
+            </div>
+          </div>
+
+          <!-- RIGHT: Payment -->
+          <div class="flex flex-col gap-8">
+            <h3 class="text-xs font-bold tracking-[0.2em] uppercase text-gold/70 border-b border-white/[0.04] pb-4" data-i18n="paymentMethod">
+              طريقة الدفع
+            </h3>
+
+            <!-- Payment options -->
+            <div class="flex flex-col gap-4">
+              <label class="payment-option">
+                <input type="radio" name="payment_method" id="payment_cod" checked class="accent-gold w-4 h-4 flex-shrink-0">
+                <div>
+                  <p class="text-xs font-bold text-white" data-i18n="paymentCOD">الدفع عند الاستلام (COD)</p>
+                  <p class="text-gray-500 text-[10px] mt-1">ادفع نقداً عند استلام طلبك</p>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" id="payment_ep" class="accent-gold w-4 h-4 flex-shrink-0">
+                <div>
+                  <p class="text-xs font-bold text-white" data-i18n="paymentEP">الدفع الإلكتروني</p>
+                  <p class="text-gray-500 text-[10px] mt-1">Visa / MasterCard — آمن ومشفر</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Card form (shown on EP selection) -->
+            <div id="epCardFormSection" class="hidden flex flex-col gap-5 transition-all opacity-0">
+              <!-- Card mockup -->
+              <div class="vip-card">
+                <div class="flex justify-between items-start">
+                  <i class="ri-gemstone-fill text-gold text-2xl"></i>
+                  <span class="text-[9px] tracking-[0.2em] uppercase text-gold/60 font-bold">ROYAL MEMBER</span>
+                </div>
+                <div>
+                  <p class="font-mono text-sm text-white/70 tracking-[0.2em] mb-3">XXXX XXXX XXXX XXXX</p>
+                  <div class="flex justify-between">
+                    <span class="text-[10px] text-gray-500 uppercase tracking-wider">ROSE BAGHDAD</span>
+                    <span class="text-[10px] text-gray-500 font-mono">MM/YY</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label class="luxury-label" data-i18n="cardHolderName">اسم صاحب البطاقة</label>
+                <input type="text" class="luxury-input" placeholder="FULL NAME ON CARD">
+              </div>
+              <div>
+                <label class="luxury-label" data-i18n="cardNumber">رقم البطاقة</label>
+                <input type="text" maxlength="19" class="luxury-input font-mono" placeholder="4000 1234 5678 9010">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="luxury-label" data-i18n="cardExpiry">تاريخ الانتهاء</label>
+                  <input type="text" class="luxury-input font-mono" placeholder="MM/YY">
+                </div>
+                <div>
+                  <label class="luxury-label" data-i18n="cardCVV">رمز الأمان</label>
+                  <input type="password" maxlength="3" class="luxury-input font-mono" placeholder="•••">
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit CTA -->
+            <button type="submit" class="btn-hero w-full justify-center mt-6" data-i18n="placeOrderBtn">
+              تأكيد وشحن الطلب الملكي
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER & POLICIES
+  ═══════════════════════════════════════════════ -->
+  <footer class="footer-root pt-24 pb-12 px-6 lg:px-16 mt-0 relative z-10">
+    <div class="max-w-screen-xl mx-auto">
+
+      <!-- Top row -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16">
+
+        <!-- Brand -->
+        <div class="flex flex-col gap-6 md:col-span-2">
+          <img src="lv_0_.png" alt="Rose Baghdad" class="h-16 w-auto object-contain self-start select-none">
+          <p class="text-gray-500 text-xs leading-relaxed max-w-xs" data-i18n="footerLogoSub">
+            عطور وبخور ترسم ملامح الرفاهية والأصالة الشرقية. دار روز بغداد منذ عام ٢٠٢٢.
+          </p>
+          <div class="flex gap-3 mt-2">
+            <a href="#" class="social-link"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="social-link"><i class="ri-facebook-fill"></i></a>
+            <a href="#" class="social-link"><i class="ri-whatsapp-line"></i></a>
+            <a href="#" class="social-link"><i class="ri-tiktok-line"></i></a>
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-col gap-5">
+          <h4 class="text-[10px] font-bold tracking-[0.25em] uppercase text-gold" data-i18n="footerSecLinks">روابط هامة</h4>
+          <div class="flex flex-col gap-3">
+            <a href="#" data-route="home"        class="text-xs text-gray-500 hover:text-gold transition-colors" data-i18n="navHome">الرئيسية</a>
+            <a href="#" data-route="collections" class="text-xs text-gray-500 hover:text-gold transition-colors" data-i18n="navCollections">المجموعة الكاملة</a>
+            <a href="#" data-route="story"       class="text-xs text-gray-500 hover:text-gold transition-colors" data-i18n="navStory">قصتنا</a>
+          </div>
+        </div>
+
+        <!-- Policies -->
+        <div class="flex flex-col gap-5">
+          <h4 class="text-[10px] font-bold tracking-[0.25em] uppercase text-gold" data-i18n="footerPolicies">السياسات</h4>
+          <div class="flex flex-col gap-3">
+            <button onclick="openPolicy('privacy')" class="text-xs text-gray-500 hover:text-gold transition-colors text-right w-max" data-i18n="polPrivacy">سياسة الخصوصية</button>
+            <button onclick="openPolicy('shipping')" class="text-xs text-gray-500 hover:text-gold transition-colors text-right w-max" data-i18n="polShipping">سياسة الشحن</button>
+            <button onclick="openPolicy('return')" class="text-xs text-gray-500 hover:text-gold transition-colors text-right w-max" data-i18n="polReturn">شروط الاسترجاع</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Gradient divider -->
+      <div class="divider-gold mb-10"></div>
+
+      <!-- Bottom copyright strip -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-[10px] text-gray-600 tracking-wider" data-i18n="footerCopyright">
+          © ٢٠٢٦ روز بغداد لعطور النخبة والبخور. جميع الحقوق محفوظة.
+        </p>
+        <p class="text-[10px] text-gray-700 tracking-wider uppercase">
+          Luxury Crafted in Baghdad
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- POLICY MODALS -->
+  <div id="policyModal" class="policy-modal fixed inset-0 z-[500] flex items-center justify-center p-4 bg-midnight/90 backdrop-blur-md">
+    <div class="policy-modal-content bg-royal border border-gold/20 rounded-3xl p-8 md:p-12 max-w-2xl w-full max-h-[80vh] overflow-y-auto hide-scrollbar shadow-2xl relative">
+      <button onclick="closePolicy()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors text-2xl"><i class="ri-close-line"></i></button>
+      <h3 id="policyTitle" class="font-serif-ar text-3xl text-gold mb-6 border-b border-white/[0.05] pb-4">العنوان</h3>
+      <div id="policyBody" class="text-gray-400 text-sm leading-relaxed space-y-4">
+        <!-- Text injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       TOAST CONTAINER
+  ═══════════════════════════════════════════════ -->
+  <div id="toastContainer" class="fixed bottom-8 left-8 z-[300] flex flex-col gap-3" style="pointer-events:none;"></div>
+
+  <!-- Application Engine -->
+  <script src="app.js"></script>
+
+  <!-- Nav scroll & basic UI logic -->
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile menu
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.remove('hidden');
+    });
+    document.getElementById('closeMobileMenu').addEventListener('click', closeMobile);
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+    window.closeMobile = closeMobile;
+
+    // Cart open/close
+    function openCart() {
+      document.getElementById('cartDrawer').classList.add('open');
+      document.getElementById('cartOverlay').classList.add('visible');
+    }
+    function closeCart() {
+      document.getElementById('cartDrawer').classList.remove('open');
+      document.getElementById('cartOverlay').classList.remove('visible');
+    }
+    window.closeCart = closeCart;
+    document.getElementById('openCartBtn').addEventListener('click', openCart);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+    document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+    // PDP Tabs
+    document.querySelectorAll('.pdp-tab-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.pdp-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.pdp-tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+      });
+    });
+
+  </script>
+</body>
+</html>
