@@ -1,0 +1,15 @@
+{
+  "webhookUrl": "https://hook.integromat.com/your_unique_webhook_id_here",
+  "githubUrl": "https://github.com/mokonods-max/mllh.git",
+  "branch": "main",
+  "autoCommit": true,
+  "autoPush": true,
+  "ignoredPaths": [
+    "node_modules",
+    ".git",
+    ".gitignore",
+    "sync-engine.js",
+    "sync-config.json",
+    "sync-config.local.json"
+  ]
+}
