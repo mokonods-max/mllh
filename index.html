@@ -156,71 +156,72 @@
   ══════════════════════════════════════════════ -->
   <div id="view-home" class="page-view">
 
-    <!-- ─── 1. CINEMATIC HERO ─── -->
+    <!-- ─── 1. CINEMATIC HERO (UMBRA FULL-WIDTH SLIDER) ─── -->
     <section class="hero" aria-label="Hero Section">
-      <div class="hero-glow" aria-hidden="true"></div>
+      <!-- Background Slider -->
+      <div id="heroBgSlider" class="hero-bg-slider" aria-hidden="true">
+        <div class="hero-slide active">
+          <picture>
+            <source srcset="assets/img/Shopping Bag Mock-2up.webp" type="image/webp">
+            <img src="The visual identity of Rose Baghdad/Links/Shopping Bag Mock-2up.png" alt="Rose Baghdad Display" loading="eager" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="hero-slide">
+          <picture>
+            <source srcset="assets/img/Cosmetic Jar Mockup 04.webp" type="image/webp">
+            <img src="The visual identity of Rose Baghdad/Links/Cosmetic Jar Mockup 04.png" alt="Rose Baghdad Products" loading="lazy">
+          </picture>
+        </div>
+        <div class="hero-slide">
+          <picture>
+            <source srcset="assets/img/Parfume_02_04.webp" type="image/webp">
+            <img src="The visual identity of Rose Baghdad/Links/Parfume_02_04.png" alt="Luxury Perfume" loading="lazy">
+          </picture>
+        </div>
+        <div class="hero-overlay"></div>
+      </div>
 
-      <div class="container">
-        <div class="hero-grid">
+      <!-- Glassmorphism Content -->
+      <div class="container hero-content-container">
+        <div class="hero-text glass-panel">
+          <p class="t-eyebrow hero-eyebrow" data-i18n="heroSubtitle" style="margin-bottom:16px;">
+            تأسست عام ٢٠٢٢ — رمز الرقي والأصالة
+          </p>
 
-          <!-- Text -->
-          <div class="hero-text" style="order:2;">
-            <p class="t-eyebrow hero-eyebrow" data-i18n="heroSubtitle">
-              تأسست عام ٢٠٢٢ — رمز الرقي والأصالة
-            </p>
+          <h1 class="t-h1 hero-heading" style="color:white; margin-bottom:20px;" data-i18n-html="heroTitle">
+            حيث يغدو<br>
+            <em class="gold-text" style="font-style:normal;">العطر</em><br>
+            فناً أصيلاً
+          </h1>
 
-            <h1 class="t-h1 hero-heading" style="color:white;" data-i18n-html="heroTitle">
-              حيث يغدو<br>
-              <em class="gold-text" style="font-style:normal;">العطر</em><br>
-              فناً أصيلاً
-            </h1>
+          <div class="divider-short hero-divider" style="margin-bottom:20px;"></div>
 
-            <div class="divider-gold hero-divider" style="height:1px;"></div>
+          <p class="t-body hero-desc" style="max-width:520px; margin:0 auto 32px;" data-i18n="heroDesc">
+            نصنع من أجود المكونات الطبيعية والزيوت النادرة عطوراً وبخوراً تليق بأصحاب الذوق الرفيع. تجربة فريدة من نوعها من قلب بغداد العريقة.
+          </p>
 
-            <p class="t-body hero-desc" style="max-width:480px;" data-i18n="heroDesc">
-              نصنع من أجود المكونات الطبيعية والزيوت النادرة عطوراً وبخوراً تليق بأصحاب الذوق الرفيع. تجربة فريدة من نوعها من قلب بغداد العريقة.
-            </p>
-
-            <div class="hero-ctas">
-              <a href="#" data-route="collections" class="btn-primary" data-i18n="heroCTA">
-                اكتشف المجموعة
-                <i class="ri-arrow-left-line"></i>
-              </a>
-              <a href="#" data-route="story" class="btn-ghost" data-i18n="navStory">قصتنا</a>
-            </div>
-
-            <div class="hero-stats">
-              <div>
-                <p class="hero-stat-value">+٢٠٠</p>
-                <p class="hero-stat-label" data-i18n="statProducts">تركيبة فريدة</p>
-              </div>
-              <div>
-                <p class="hero-stat-value">5 <span style="color:#D4AF37;font-size:80%;">★</span></p>
-                <p class="hero-stat-label" data-i18n="statRating">تقييم العملاء</p>
-              </div>
-              <div>
-                <p class="hero-stat-value">٢٠٢٢</p>
-                <p class="hero-stat-label" data-i18n="statYear">سنة التأسيس</p>
-              </div>
-            </div>
+          <div class="hero-ctas" style="display:flex; justify-content:center; flex-wrap:wrap; gap:16px; margin-bottom:32px;">
+            <a href="#" data-route="collections" class="btn-primary" data-i18n-html="heroCTA">
+              اكتشف المجموعة
+              <i class="ri-arrow-left-line"></i>
+            </a>
+            <a href="#" data-route="story" class="btn-ghost" data-i18n="navStory">قصتنا</a>
           </div>
 
-          <!-- Visual -->
-          <div class="hero-visual" style="order:1;">
-            <div class="hero-product-glow" aria-hidden="true"></div>
-            <picture>
-              <source srcset="assets/img/Parfume_02_03.webp" type="image/webp">
-              <img
-                src="The visual identity of Rose Baghdad/Links/Parfume_02_03.png"
-                alt="عطر روز بغداد الملكي"
-                class="hero-img"
-                width="480" height="600"
-                loading="eager"
-                fetchpriority="high"
-                decoding="sync">
-            </picture>
+          <div class="hero-stats" style="display:flex; justify-content:center; gap:clamp(20px, 4vw, 40px); border-top:1px solid rgba(255,255,255,0.08); padding-top:24px; width:100%;">
+            <div>
+              <p class="hero-stat-value">+٢٠٠</p>
+              <p class="hero-stat-label" data-i18n="statProducts">تركيبة فريدة</p>
+            </div>
+            <div>
+              <p class="hero-stat-value">5 <span style="color:#D4AF37;font-size:80%;">★</span></p>
+              <p class="hero-stat-label" data-i18n="statRating">تقييم العملاء</p>
+            </div>
+            <div>
+              <p class="hero-stat-value">٢٠٢٢</p>
+              <p class="hero-stat-label" data-i18n="statYear">سنة التأسيس</p>
+            </div>
           </div>
-
         </div>
       </div>
 
@@ -288,7 +289,7 @@
 
         <div class="section-header">
           <p class="t-eyebrow" data-i18n="whyEyebrow">لماذا روز بغداد</p>
-          <h2 class="t-h2" style="color:white;" data-i18n="whyTitle">
+          <h2 class="t-h2" style="color:white;" data-i18n-html="whyTitle">
             خُلق ليرتديه <em class="gold-text" style="font-style:normal;">الرجل والمرأة</em>
           </h2>
           <p class="t-body" style="max-width:560px; text-align:center;" data-i18n="whyDesc">
@@ -378,7 +379,7 @@
 
         <div class="section-header">
           <p class="t-eyebrow" data-i18n="reviewsEyebrow">آراء عملائنا</p>
-          <h2 class="t-h2" style="color:white;" data-i18n="reviewsTitle">يقولون عن <em class="gold-text" style="font-style:normal;">روز بغداد</em></h2>
+          <h2 class="t-h2" style="color:white;" data-i18n-html="reviewsTitle">يقولون عن <em class="gold-text" style="font-style:normal;">روز بغداد</em></h2>
           <div class="divider-short"></div>
           <!-- Stars summary -->
           <div style="display:flex; align-items:center; gap:10px; margin-top:4px;">
@@ -546,7 +547,7 @@
 
       <div style="max-width:720px; margin:0 auto; text-align:center; margin-bottom:clamp(56px,10vw,96px);">
         <p class="t-eyebrow" style="margin-bottom:16px;">منذ ٢٠٢٢</p>
-        <h1 class="t-h1" style="color:white; margin-bottom:20px;" data-i18n="storyTitle">
+        <h1 class="t-h1" style="color:white; margin-bottom:20px;" data-i18n-html="storyTitle">
           تراث يرويه <em class="gold-text" style="font-style:normal;">العطر</em>
         </h1>
         <div class="divider-short" style="margin-bottom:24px;"></div>

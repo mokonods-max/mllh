@@ -326,6 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletter();
   initCheckoutPayment();
   renderCartDrawer();
+  initHeroSlider();
 
   // Defer heavy rendering to allow hero to paint smoothly
   setTimeout(() => {
@@ -339,6 +340,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, 100);
 });
+
+// ─────────────────────────────────────────────────────────────
+// HERO SLIDER (UMBRA REPLICATION)
+// ─────────────────────────────────────────────────────────────
+function initHeroSlider() {
+  const slides = document.querySelectorAll('.hero-slide');
+  if (!slides.length) return;
+  let cur = 0;
+  setInterval(() => {
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5500); // Crossfade every 5.5s
+}
 
 // ─────────────────────────────────────────────────────────────
 // LANGUAGE ENGINE
