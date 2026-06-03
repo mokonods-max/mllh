@@ -787,17 +787,28 @@ ul, ol { list-style: none; }
 
 .showcase-img-wrap {
   flex-shrink: 0;
-  width: clamp(140px, 30vw, 260px);
-  height: clamp(160px, 35vw, 300px);
+  width: clamp(200px, 40vw, 380px);
+  height: clamp(220px, 45vw, 440px);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+.showcase-img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 .showcase-img-wrap img {
   height: 100%;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 16px 32px rgba(0,0,0,0.75));
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+  position: relative;
+  z-index: 1;
 }
 
 /* ============================================================
@@ -811,12 +822,18 @@ ul, ol { list-style: none; }
 @media (min-width: 768px) { .gender-grid { grid-template-columns: 1fr 1fr; } }
 
 .gender-card {
-  border-radius: var(--r-lg);
+  border-radius: 24px;
   overflow: hidden;
   position: relative;
-  min-height: clamp(320px, 55vw, 520px);
+  min-height: clamp(340px, 60vw, 560px);
   display: flex;
   align-items: flex-end;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: box-shadow 0.5s var(--ease-lux), transform 0.5s var(--ease-lux);
+}
+.gender-card:hover {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  transform: translateY(-4px);
 }
 .gender-card-bg {
   position: absolute;
@@ -835,18 +852,23 @@ ul, ol { list-style: none; }
   position: absolute;
   inset: 0;
   background: linear-gradient(to top,
-    rgba(5,5,5,0.92) 0%,
-    rgba(5,5,5,0.55) 40%,
-    rgba(5,5,5,0.08) 80%,
+    rgba(5,5,5,0.95) 0%,
+    rgba(5,5,5,0.65) 40%,
+    rgba(5,5,5,0.15) 80%,
     transparent 100%);
+  transition: opacity 0.5s var(--ease-lux);
+}
+.gender-card:hover .gender-card-overlay {
+  opacity: 0.9;
 }
 .gender-card-content {
   position: relative;
   z-index: 10;
-  padding: clamp(24px, 4vw, 40px);
+  padding: clamp(32px, 5vw, 48px);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
+  width: 100%;
 }
 
 /* Feature bullets inside gender card */
@@ -872,32 +894,25 @@ ul, ol { list-style: none; }
 /* ============================================================
    TESTIMONIALS — Dark Glass Cards
    ============================================================ */
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(16px, 3vw, 24px);
-}
-@media (min-width: 640px) { .testimonials-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
-
 .testimonial-card {
-  background: var(--c-surface);
-  border: 1px solid rgba(255,255,255,0.05);
-  border-radius: var(--r-lg);
-  padding: clamp(20px, 3.5vw, 32px);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   position: relative;
   overflow: hidden;
   will-change: transform;
   transform: translateZ(0);
-  transition: border-color 0.35s, box-shadow 0.35s, transform 0.5s var(--ease-lux);
+  transition: border-color 0.4s, box-shadow 0.4s, transform 0.6s var(--ease-lux);
 }
 .testimonial-card:hover {
-  border-color: rgba(212,175,55,0.2);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.06);
-  transform: translate3d(0, -5px, 0);
+  border-color: rgba(212,175,55,0.3);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(212,175,55,0.08);
+  transform: translate3d(0, -6px, 0);
 }
 .testimonial-card::before {
   content: '"';
@@ -986,23 +1001,40 @@ ul, ol { list-style: none; }
 
 .faq-icon {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(212,175,55,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--c-gold);
-  font-size: 16px;
-  will-change: transform;
-  transform: rotate(0deg) translateZ(0);
-  transition: transform 0.4s var(--ease-lux), border-color 0.3s, background 0.3s;
+  border: 1px solid rgba(212,175,55,0.3);
+  position: relative;
+  transition: border-color 0.4s, background 0.4s;
+}
+.faq-icon::before, .faq-icon::after {
+  content: "";
+  position: absolute;
+  background-color: var(--c-gold);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s var(--ease-lux), opacity 0.4s var(--ease-lux);
+}
+.faq-icon::before { /* Horizontal line (-) */
+  width: 14px;
+  height: 2px;
+}
+.faq-icon::after { /* Vertical line (|) */
+  width: 2px;
+  height: 14px;
 }
 .faq-item.open .faq-icon {
-  transform: rotate(45deg) translateZ(0);
   background: rgba(212,175,55,0.1);
-  border-color: rgba(212,175,55,0.5);
+  border-color: rgba(212,175,55,0.6);
+}
+.faq-item.open .faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+.faq-item.open .faq-icon::before {
+  transform: translate(-50%, -50%) rotate(180deg);
 }
 
 .faq-answer {
@@ -1364,3 +1396,4 @@ ul, ol { list-style: none; }
   }
   .hero-img { animation: none !important; }
 }
+@keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
