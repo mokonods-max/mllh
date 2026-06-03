@@ -73,15 +73,30 @@ html {
 }
 
 body {
-  background: var(--c-black);
+  background-color: var(--c-black);
   color: var(--c-cream);
   font-family: var(--font-ar);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.7;
-  /* GPU layer for scroll */
-  transform: translateZ(0);
+}
+
+/* Ultra-smooth, high-end linear gradient transition fixed background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* Soft champagne gold highlight at the top seamlessly blending into deep charcoal black */
+  background: linear-gradient(
+    180deg, 
+    rgba(212, 175, 55, 0.08) 0%, 
+    rgba(212, 175, 55, 0.02) 20%, 
+    var(--c-jet) 45%, 
+    var(--c-black) 100%
+  );
+  z-index: -2;
+  pointer-events: none;
 }
 
 [dir="rtl"] { font-family: var(--font-ar); text-align: right; }
