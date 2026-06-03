@@ -829,28 +829,33 @@ ul, ol { list-style: none; }
   position: relative;
   aspect-ratio: 1/1;
   overflow: hidden;
-  /* FIX 1: Exact dark background — if sub-pixel bleeds, it bleeds black */
-  background: #111111;
-  /* FIX 2: Box-shadow hack — artificially seals the anti-aliased fractional edges */
-  box-shadow: 0 0 1px #111111;
-  /* FIX 4: Zero out any spacing between img-wrap and text container */
+
+  /* FIX 1 — Force dark fill: any sub-pixel bleed leaks #000, never white */
+  background-color: #000000;
+
+  /* FIX 3 — Inset box-shadow seal: physically covers the sub-pixel gap */
+  box-shadow: 0 0 0 1px #000000 inset;
+
+  /* FIX 4 — GPU hardware acceleration: stabilizes rendering during transform */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
   margin: 0;
   padding: 0;
   flex-shrink: 0;
-  /* Hardware acceleration */
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 .product-img-wrap img {
-  display: block; /* eliminate inline baseline gap */
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   will-change: transform;
   transform: scale3d(1, 1, 1) translateZ(0);
   backface-visibility: hidden;
-  /* FIX 3: Outline hack — forces browser to clean-render edges during transform */
+
+  /* FIX 2 — Sub-pixel seal: forces browser edge re-calculation during transform */
   outline: 1px solid transparent;
+
   transition: transform 0.8s var(--ease-lux);
 }
 .product-card:hover .product-img-wrap img {
@@ -860,10 +865,10 @@ ul, ol { list-style: none; }
 .product-img-wrap::after {
   content: '';
   position: absolute;
-  bottom: -1px; /* extend 1px past the boundary to seal any sub-pixel gap */
+  bottom: -1px;
   left: 0; right: 0;
   height: 35%;
-  background: linear-gradient(to bottom, transparent, #111111);
+  background: linear-gradient(to bottom, transparent, #000000);
   pointer-events: none;
 }
 
