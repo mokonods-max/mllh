@@ -82,22 +82,7 @@ body {
   line-height: 1.7;
 }
 
-/* Ultra-smooth, high-end linear gradient transition fixed background */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  /* Soft champagne gold highlight at the top seamlessly blending into deep charcoal black */
-  background: linear-gradient(
-    180deg, 
-    rgba(212, 175, 55, 0.08) 0%, 
-    rgba(212, 175, 55, 0.02) 20%, 
-    var(--c-jet) 45%, 
-    var(--c-black) 100%
-  );
-  z-index: -2;
-  pointer-events: none;
-}
+
 
 [dir="rtl"] { font-family: var(--font-ar); text-align: right; }
 [dir="ltr"] { font-family: var(--font-en); text-align: left; }
@@ -212,34 +197,17 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================================
-   ANNOUNCEMENT BAR
-   ============================================================ */
-.announcement-bar {
-  background: linear-gradient(90deg, var(--c-black), rgba(212,175,55,0.07), var(--c-black));
-  border-bottom: 1px solid rgba(212,175,55,0.08);
-  padding: clamp(8px, 1.5vw, 10px) 16px;
-  text-align: center;
-  min-height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* ============================================================
    NAVIGATION — Glassmorphism
    ============================================================ */
 .nav-root {
   position: fixed;
-  top: 38px; /* below announcement bar */
+  top: 0;
   left: 0;
   right: 0;
   z-index: 100;
   will-change: transform;
   transform: translateZ(0);
   transition: top 0.3s var(--ease-lux), background 0.4s var(--ease-lux), border-color 0.4s var(--ease-lux);
-}
-.announcement-hidden .nav-root {
-  top: 0;
 }
 .nav-root.scrolled {
   background: rgba(5, 5, 5, 0.88);
@@ -620,6 +588,34 @@ ul, ol { list-style: none; }
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition: opacity 0.5s var(--ease-lux), transform 0.5s var(--ease-lux);
+}
+
+/* ============================================================
+   PREMIUM CTA
+   ============================================================ */
+.cta-premium-title {
+  background: linear-gradient(to right, #f8f1de, #d4af37, #f8f1de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 4px 16px rgba(212,175,55,0.2);
+  letter-spacing: -0.01em;
+}
+
+.btn-cta-premium {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.05) 100%);
+  border: 1px solid rgba(212,175,55,0.5);
+  box-shadow: 0 8px 32px -8px rgba(212,175,55,0.3);
+  transition: all 0.4s var(--ease-lux);
+  color: var(--c-gold);
+}
+.btn-cta-premium:hover {
+  background: linear-gradient(135deg, rgba(212,175,55,0.25) 0%, rgba(212,175,55,0.1) 100%);
+  border-color: rgba(212,175,55,0.8);
+  box-shadow: 0 12px 40px -10px rgba(212,175,55,0.5);
+  transform: translateY(-2px);
+  color: var(--c-gold-light);
 }
 
 /* ============================================================

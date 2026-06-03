@@ -31,8 +31,6 @@
 
   <!-- Prevent FOUC: critical color variables -->
   <style>
-    body { background: #050505; }
-    .announcement-bar { min-height: 38px; }
     .nav-root { min-height: 76px; }
     /* Product card image skeleton shimmer */
     .product-img-wrap { background: #0f0d0a; }
@@ -43,15 +41,7 @@
 
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     ANNOUNCEMENT BAR
-═══════════════════════════════════════════════════════ -->
-<div class="announcement-bar" id="announcementBar">
-  <p class="t-eyebrow" style="color:#6b7280; font-size:10px;">
-    <i class="ri-vip-crown-fill" style="color:#D4AF37; margin-inline-end:8px; font-size:12px;"></i>
-    <span data-i18n="announcementText">توصيل ملكي مجاني ومؤمن لجميع المحافظات العراقية</span>
-  </p>
-</div>
+
 
 <!-- ═══════════════════════════════════════════════════════
      NAVIGATION — Glassmorphism
@@ -416,16 +406,16 @@
     </section>
 
     <!-- ─── 7. CTA BANNER ─── -->
-    <section class="section" style="background:linear-gradient(135deg, #0a0908 0%, #14120e 50%, #0a0908 100%); border-top:1px solid rgba(212,175,55,0.07); border-bottom:1px solid rgba(212,175,55,0.07);" aria-label="Call To Action">
+    <section class="section" style="background:#0a0908; border-top:1px solid rgba(212,175,55,0.07); border-bottom:1px solid rgba(212,175,55,0.07);" aria-label="Call To Action">
       <div class="container">
         <div style="max-width:680px; margin:0 auto; text-align:center; padding: 40px 0;">
-          <h2 class="t-h2" style="color:var(--c-gold); margin-bottom:16px;" data-i18n="ctaBannerTitle">هل أنت مستعد لاكتشاف عطرك القادم؟</h2>
+          <h2 class="t-h2 cta-premium-title" style="margin-bottom:16px;" data-i18n="ctaBannerTitle">اكتشف بصمتك العطرية</h2>
           <p class="t-body" style="margin-bottom:clamp(32px,5vw,48px); font-size:1.1rem;" data-i18n="ctaBannerDesc">
             استكشف مجموعتنا الفاخرة من العطور والبخور الملكي.
           </p>
-          <button onclick="navigateTo('collections')" class="btn-primary" style="padding: 18px 48px; font-size: 1.1rem;">
+          <button onclick="navigateTo('collections')" class="btn-primary btn-cta-premium" style="padding: 18px 48px; font-size: 1.1rem; border-radius:999px;">
             <span data-i18n="shopNow">تسوق الآن</span>
-            <i class="ri-shopping-bag-3-line" style="margin-right:8px; margin-left:0;"></i>
+            <i class="ri-sparkling-fill" style="margin-right:8px; margin-left:0;"></i>
           </button>
         </div>
       </div>
@@ -772,8 +762,7 @@
 
 <!-- Inline boot: critical interactivity (non-deferrable) -->
 <script>
-  // ── Announcement bar hide on scroll + nav offset
-  const announceBar = document.getElementById('announcementBar');
+  // ── Nav offset
   const nav = document.getElementById('mainNav');
   let ticking = false;
   let lastScroll = 0;
@@ -784,13 +773,6 @@
     requestAnimationFrame(() => {
       const scrollY = window.scrollY;
       nav.classList.toggle('scrolled', scrollY > 40);
-      // Hide announcement bar after 100px scroll
-      const barH = announceBar.offsetHeight;
-      announceBar.style.transform = scrollY > 100
-        ? `translate3d(0, -${barH}px, 0)`
-        : 'translate3d(0, 0, 0)';
-      announceBar.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-      nav.style.top = scrollY > 100 ? '0' : `${barH}px`;
       lastScroll = scrollY;
       ticking = false;
     });

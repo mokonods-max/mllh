@@ -243,6 +243,11 @@ function applySliderLogic(track, autoPlay = false) {
     let exactScroll = track.scrollLeft;
 
     function tick() {
+      // Sync exactScroll if external scroll occurred (e.g. arrow click or swipe)
+      if (Math.abs(track.scrollLeft - exactScroll) > 3) {
+        exactScroll = track.scrollLeft;
+      }
+
       exactScroll += speed;
       track.scrollLeft = exactScroll;
       
@@ -351,7 +356,7 @@ function renderProductsPage() {
   requestAnimationFrame(() => {
     storeCategories.forEach(cat => {
       const track = document.getElementById(`cat-track-${cat.id}`);
-      if (track) applySliderLogic(track, false);
+      if (track) applySliderLogic(track, true); // Enabled auto-scroll
     });
 
     // Arrow click handlers (event delegation)
