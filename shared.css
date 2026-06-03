@@ -623,40 +623,216 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================================
-   PRODUCT CARD
+   WIDE CONTAINER (Full screen utilization for products page)
+   ============================================================ */
+.container-wide {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+/* ============================================================
+   PRODUCTS PAGE — Header Banner & Breadcrumbs
+   ============================================================ */
+.products-page-header {
+  padding: clamp(100px, 14vw, 150px) 0 clamp(28px, 4vw, 40px);
+  border-bottom: 1px solid rgba(212,175,55,0.08);
+  background: linear-gradient(180deg, rgba(20,18,14,0.7) 0%, rgba(10,9,8,1) 100%);
+}
+
+.products-page-title {
+  font-family: var(--font-serif-ar);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 12px;
+  letter-spacing: -0.01em;
+}
+[dir="ltr"] .products-page-title {
+  font-family: var(--font-serif-en);
+}
+
+.products-page-subtitle {
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: var(--c-gray-4);
+  margin-top: 8px;
+  font-weight: 400;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.breadcrumbs a {
+  color: var(--c-gray-4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumbs a:hover { color: var(--c-gold); }
+.breadcrumb-sep {
+  color: rgba(255,255,255,0.15);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+[dir="ltr"] .breadcrumb-sep i { transform: rotate(180deg); }
+.breadcrumb-current {
+  color: var(--c-gold);
+  font-weight: 600;
+}
+
+/* ============================================================
+   PRODUCTS PAGE — Sections Container
+   ============================================================ */
+.products-sections-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 5vw, 56px);
+  padding: clamp(32px, 5vw, 56px) 0 clamp(56px, 8vw, 96px);
+}
+
+/* ============================================================
+   CATEGORY ROW (Each category section)
+   ============================================================ */
+.category-row {
+  position: relative;
+}
+
+.category-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(16px, 3vw, 28px);
+  gap: 16px;
+}
+
+.category-row-title-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.5vw, 14px);
+}
+
+.category-row-icon {
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--c-gold);
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.25));
+}
+
+.category-row-title {
+  font-family: var(--font-ar);
+  font-size: clamp(18px, 3vw, 26px);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+[dir="ltr"] .category-row-title {
+  font-family: var(--font-en);
+}
+
+.category-row-count {
+  font-size: 13px;
+  color: var(--c-gray-4);
+  font-weight: 400;
+}
+
+/* Arrow Buttons */
+.category-row-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.cat-arrow-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,55,0.2);
+  background: rgba(20,18,14,0.6);
+  color: var(--c-gold);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  backdrop-filter: blur(4px);
+}
+.cat-arrow-btn:hover {
+  background: rgba(212,175,55,0.12);
+  border-color: rgba(212,175,55,0.5);
+  transform: scale(1.08);
+}
+.cat-arrow-btn:active {
+  transform: scale(0.95);
+}
+
+/* Category Slider */
+.category-slider-outer {
+  position: relative;
+  overflow: hidden;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+.category-slider-track {
+  display: flex;
+  gap: clamp(14px, 2vw, 22px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  padding-bottom: 8px;
+  will-change: scroll-position;
+  transform: translateZ(0);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.category-slider-track::-webkit-scrollbar { display: none; }
+.category-slider-track.dragging { cursor: grabbing; scroll-snap-type: none; }
+
+.category-slider-track .product-card {
+  scroll-snap-align: start;
+}
+
+/* ============================================================
+   PRODUCT CARD (Redesigned — defined borders, image bg, visible ATC)
    ============================================================ */
 .product-card {
   flex-shrink: 0;
-  width: clamp(220px, 35vw, 300px);
-  border-radius: var(--r-md);
+  width: clamp(200px, 28vw, 280px);
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   will-change: transform;
   transform: translateZ(0);
-  transition: transform 0.6s var(--ease-lux);
+  transition: transform 0.5s var(--ease-lux);
 }
-.product-card:hover { transform: translate3d(0, -10px, 0); }
+.product-card:hover { transform: translate3d(0, -8px, 0); }
 
 .product-card-inner {
   height: 100%;
   display: flex;
   flex-direction: column;
-  border: 1px solid transparent;
-  border-radius: var(--r-md);
+  background: #151515;
+  border: 1px solid rgba(255,215,0,0.08);
+  border-radius: 16px;
   overflow: hidden;
   transition: background 0.35s, border-color 0.35s, box-shadow 0.35s;
 }
 .product-card:hover .product-card-inner {
-  background: rgba(255,255,255,0.025);
-  border-color: rgba(212,175,55,0.2);
-  box-shadow: 0 18px 50px -15px rgba(0,0,0,0.8), 0 0 32px -15px rgba(212,175,55,0.1);
+  background: #1a1a1a;
+  border-color: rgba(212,175,55,0.25);
+  box-shadow: 0 16px 48px -12px rgba(0,0,0,0.7), 0 0 24px -8px rgba(212,175,55,0.08);
 }
 
+/* Image Area — soft gradient background to make bottles pop */
 .product-img-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 40%, rgba(197,160,89,0.04) 0%, transparent 70%);
+  background: linear-gradient(160deg, #1f1e1b 0%, #161412 50%, #0f0e0c 100%);
 }
 .product-img-wrap img {
   width: 100%;
@@ -664,7 +840,7 @@ ul, ol { list-style: none; }
   object-fit: cover;
   will-change: transform;
   transform: scale3d(1, 1, 1);
-  transition: transform 0.9s var(--ease-lux);
+  transition: transform 0.8s var(--ease-lux);
 }
 .product-card:hover .product-img-wrap img { transform: scale3d(1.06, 1.06, 1); }
 
@@ -672,48 +848,60 @@ ul, ol { list-style: none; }
   content: '';
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 28%;
-  background: linear-gradient(to bottom, transparent, rgba(5,5,5,0.75));
+  height: 35%;
+  background: linear-gradient(to bottom, transparent, #151515);
   pointer-events: none;
 }
 
-.product-hover-cta {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 18px;
-  opacity: 0;
-  will-change: opacity;
-  transform: translateZ(0);
-  transition: opacity 0.4s var(--ease-lux);
-  z-index: 10;
-}
-.product-card:hover .product-hover-cta { opacity: 1; }
-
+/* Badge */
 .product-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 10px;
+  right: 10px;
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: rgba(212,175,55,0.13);
+  background: rgba(212,175,55,0.15);
   border: 1px solid rgba(212,175,55,0.35);
   color: var(--c-gold);
   padding: 4px 10px;
   border-radius: var(--r-pill);
   backdrop-filter: blur(8px);
+  z-index: 5;
 }
-[dir="rtl"] .product-badge { right: auto; left: 12px; }
+[dir="rtl"] .product-badge { right: auto; left: 10px; }
 
+/* Product Info */
 .product-info {
-  padding: clamp(14px, 2.5vw, 20px) clamp(16px, 2.5vw, 22px) clamp(18px, 3vw, 24px);
+  padding: clamp(12px, 2vw, 18px) clamp(14px, 2vw, 20px) clamp(14px, 2vw, 20px);
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+}
+
+.product-name {
+  font-size: clamp(13px, 1.8vw, 15px);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.45;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.product-reviews {
+  font-size: 11px;
+  color: var(--c-gray-4);
 }
 
 .stars-gold {
@@ -724,13 +912,64 @@ ul, ol { list-style: none; }
 }
 
 .price-tag {
-  font-size: clamp(15px, 2.5vw, 18px);
+  font-size: clamp(14px, 2vw, 17px);
   font-weight: 700;
-  color: var(--c-cream);
+  color: var(--c-gold);
+}
+
+/* Price + Add to Cart row */
+.product-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Always-Visible Add to Cart Button */
+.product-atc-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(212,175,55,0.25);
+  background: rgba(212,175,55,0.08);
+  color: var(--c-gold);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  flex-shrink: 0;
+}
+.product-atc-btn i {
+  font-size: 16px;
+}
+.product-atc-btn:hover {
+  background: rgba(212,175,55,0.18);
+  border-color: rgba(212,175,55,0.5);
+  box-shadow: 0 0 16px rgba(212,175,55,0.12);
+  transform: scale(1.04);
+}
+.product-atc-btn:active {
+  transform: scale(0.96);
+}
+
+/* Hide the text label on very small cards / mobile, keep icon */
+.product-atc-label {
+  display: none;
+}
+@media (min-width: 480px) {
+  .product-atc-label {
+    display: inline;
+  }
 }
 
 /* ============================================================
-   SLIDER — CSS scroll-snap + no scrollbar
+   SLIDER — CSS scroll-snap + no scrollbar (Homepage Best Sellers)
    ============================================================ */
 .slider-outer {
   position: relative;
@@ -741,13 +980,12 @@ ul, ol { list-style: none; }
 
 .slider-track {
   display: flex;
-  gap: clamp(16px, 2.5vw, 28px);
+  gap: clamp(14px, 2vw, 22px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   cursor: grab;
   padding-bottom: 12px;
-  /* GPU scrolling */
   will-change: scroll-position;
   transform: translateZ(0);
   -ms-overflow-style: none;

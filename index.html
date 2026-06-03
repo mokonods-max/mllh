@@ -512,31 +512,28 @@
 
 
   <!-- ══════════════════════════════════════════════
-       COLLECTIONS PAGE
+       PRODUCTS PAGE (Amazon/AliExpress Architecture)
   ══════════════════════════════════════════════ -->
-  <div id="view-collections" class="page-view" style="background:#0f0d0a; min-height:100vh;">
-    <div style="padding:clamp(96px,14vw,140px) 0 clamp(56px,8vw,96px);">
+  <div id="view-collections" class="page-view" style="background:#0a0908; min-height:100vh;">
 
-      <div class="container">
-        <div class="section-header">
-          <p class="t-eyebrow">مجموعاتنا</p>
-          <h1 class="t-h1" style="color:white;" data-i18n="navCollections">المجموعة الكاملة</h1>
-          <div class="divider-short"></div>
-        </div>
-      </div>
-
-      <div class="container" style="margin-bottom:clamp(48px, 8vw, 80px);">
-        <div id="collectionsHero" style="display:grid; grid-template-columns:1fr; gap:24px; position:relative;">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <div class="container">
-        <div id="collectionsGrid" class="product-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:clamp(20px, 4vw, 40px);">
-          <!-- Populated by JS -->
-        </div>
+    <!-- Page Header Banner -->
+    <div class="products-page-header">
+      <div class="container-wide">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="#" data-route="home" data-i18n="navHome">الرئيسية</a>
+          <span class="breadcrumb-sep"><i class="ri-arrow-left-s-line"></i></span>
+          <span class="breadcrumb-current" data-i18n="navCollections">المنتجات</span>
+        </nav>
+        <h1 class="products-page-title" data-i18n="navCollections">المنتجات</h1>
+        <p class="products-page-subtitle" id="productsCount"></p>
       </div>
     </div>
+
+    <!-- Category Sliders Container (Dynamically Populated) -->
+    <div id="productsContainer" class="products-sections-wrap">
+      <!-- Each category row will be injected here by JS -->
+    </div>
+
   </div>
 
 

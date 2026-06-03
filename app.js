@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     requestAnimationFrame(() => {
       renderBestSellers();
-      renderCollectionsPage();
+      renderProductsPage();
       initDynamicShowcase();
       renderTestimonials();
       renderFAQ();
@@ -71,7 +71,7 @@ function initLangToggle() {
     applyTranslations();
     requestAnimationFrame(() => {
       renderBestSellers();
-      renderCollectionsMultiSlider();
+      renderProductsPage();
       updateDynamicShowcase();
       renderTestimonials();
       renderFAQ();
@@ -146,7 +146,7 @@ function navigateTo(route) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// PRODUCT CARD BUILDER
+// PRODUCT CARD BUILDER (Redesigned — visible cart, defined borders)
 // ─────────────────────────────────────────────────────────────
 function buildProductCard(p) {
   const name  = STATE.lang === 'ar' ? p.nameAr  : p.nameEn;
@@ -160,30 +160,20 @@ function buildProductCard(p) {
         <div class="product-img-wrap">
           ${badge ? `<div class="product-badge">${badge}</div>` : ''}
           <img src="${p.img}" alt="${name}" loading="lazy" decoding="async">
-          <div class="product-hover-cta">
-            <button class="btn-add-cart" style="width:85%;"
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">${name}</h3>
+          <div class="product-meta-row">
+            <div class="stars-gold" style="display:flex;">${stars}</div>
+            <span class="product-reviews">(${p.reviews})</span>
+          </div>
+          <div class="product-price-row">
+            <span class="price-tag">${price}</span>
+            <button class="product-atc-btn"
               onclick="addToCart('${p.id}'); event.stopPropagation();"
               aria-label="${t('addToCart')}">
               <i class="ri-shopping-bag-line"></i>
-              ${t('addToCart')}
-            </button>
-          </div>
-        </div>
-        <div class="product-info">
-          <div style="display:flex; align-items:center; gap:6px; margin-bottom:10px;">
-            <div class="stars-gold" style="display:flex;">${stars}</div>
-            <span class="t-small" style="color:#6b7280;">(${p.reviews})</span>
-          </div>
-          <h3 class="t-body" style="color:white; font-weight:600; line-height:1.4; flex:1;">${name}</h3>
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.04);">
-            <span class="price-tag">${price}</span>
-            <button
-              style="width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; color:#9ca3af; transition:border-color 0.2s, color 0.2s;"
-              onmouseover="this.style.borderColor='rgba(212,175,55,0.4)'; this.style.color='#D4AF37';"
-              onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='#9ca3af';"
-              onclick="addToCart('${p.id}'); event.stopPropagation();"
-              aria-label="Quick Add">
-              <i class="ri-add-line" style="font-size:16px;"></i>
+              <span class="product-atc-label">${t('addToCart')}</span>
             </button>
           </div>
         </div>
@@ -301,39 +291,82 @@ function renderBestSellers() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// COLLECTIONS MULTI-SLIDER
+// PRODUCTS PAGE — Categorized Horizontal Sliders
 // ─────────────────────────────────────────────────────────────
-function renderCollectionsPage() {
-  const heroContainer = document.getElementById('collectionsHero');
-  const gridContainer = document.getElementById('collectionsGrid');
-  if (!heroContainer || !gridContainer) return;
+function renderProductsPage() {
+  const container = document.getElementById('productsContainer');
+  const countEl   = document.getElementById('productsCount');
+  if (!container) return;
 
-  // 1. Render Top Hero Showcase (Random 3 products)
-  const shuffled = [...STATE.products].sort(() => 0.5 - Math.random());
-  const topThree = shuffled.slice(0, 3);
-  
-  heroContainer.innerHTML = topThree.map((p, index) => {
-    const name = STATE.lang === 'ar' ? p.nameAr : p.nameEn;
-    const desc = STATE.lang === 'ar' ? p.descAr : p.descEn;
-    return `
-      <div class="showcase-card collections-hero-card" style="animation: fadeUp ${0.5 + index * 0.2}s ease forwards; opacity: 0; transform: translateY(20px);" onclick="openPDP('${p.id}')">
-        <div class="showcase-img-wrap">
-          <img src="${p.img}" alt="${name}" loading="lazy">
+  // Product count subtitle
+  if (countEl) {
+    const total = STATE.products.length;
+    countEl.textContent = STATE.lang === 'ar'
+      ? `${total} منتج فاخر متاح حالياً`
+      : `${total} luxury products available`;
+  }
+
+  const frag = document.createDocumentFragment();
+
+  storeCategories.forEach((cat, catIdx) => {
+    const products = STATE.products.filter(p => p.category === cat.id);
+    if (products.length === 0) return;
+
+    const catName = STATE.lang === 'ar' ? cat.nameAr : cat.nameEn;
+    const trackId = `cat-track-${cat.id}`;
+
+    const section = document.createElement('section');
+    section.className = 'category-row';
+    section.innerHTML = `
+      <div class="container-wide">
+        <div class="category-row-header">
+          <div class="category-row-title-group">
+            <i class="${cat.icon} category-row-icon"></i>
+            <h2 class="category-row-title">${catName}</h2>
+            <span class="category-row-count">(${products.length})</span>
+          </div>
+          <div class="category-row-arrows">
+            <button class="cat-arrow-btn" aria-label="Scroll Left" data-dir="left" data-track="${trackId}">
+              <i class="ri-arrow-left-s-line"></i>
+            </button>
+            <button class="cat-arrow-btn" aria-label="Scroll Right" data-dir="right" data-track="${trackId}">
+              <i class="ri-arrow-right-s-line"></i>
+            </button>
+          </div>
         </div>
-        <div style="display:flex; flex-direction:column; gap:16px; flex:1;">
-          <h3 class="t-h2" style="color:white;">${name}</h3>
-          <div class="divider-short" style="margin:0;"></div>
-          <p class="t-body">${desc}</p>
-          <button class="btn-gold-outline" style="align-self:flex-start; margin-top:8px;">
-            ${STATE.lang === 'ar' ? 'استكشف التحفة' : 'Explore Masterpiece'}
-          </button>
+      </div>
+      <div class="category-slider-outer">
+        <div class="category-slider-track" id="${trackId}">
+          ${products.map(p => buildProductCard(p)).join('')}
         </div>
       </div>
     `;
-  }).join('');
+    frag.appendChild(section);
+  });
 
-  // 2. Render Standard Grid Layout
-  gridContainer.innerHTML = STATE.products.map(p => buildProductCard(p)).join('');
+  container.innerHTML = '';
+  container.appendChild(frag);
+
+  // Attach slider logic + arrow buttons
+  requestAnimationFrame(() => {
+    storeCategories.forEach(cat => {
+      const track = document.getElementById(`cat-track-${cat.id}`);
+      if (track) applySliderLogic(track, false);
+    });
+
+    // Arrow click handlers (event delegation)
+    container.querySelectorAll('.cat-arrow-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const track = document.getElementById(btn.dataset.track);
+        if (!track) return;
+        const scrollAmount = track.clientWidth * 0.6;
+        const dir = btn.dataset.dir === 'left' ? -scrollAmount : scrollAmount;
+        // RTL awareness
+        const finalDir = document.dir === 'rtl' ? -dir : dir;
+        track.scrollBy({ left: finalDir, behavior: 'smooth' });
+      });
+    });
+  });
 }
 
 // ─────────────────────────────────────────────────────────────

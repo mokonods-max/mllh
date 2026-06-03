@@ -42,6 +42,16 @@ const platformProducts = [
 ];
 
 // ─────────────────────────────────────────────────────────────
+// STORE CATEGORIES (Admin Panel Ready)
+// ─────────────────────────────────────────────────────────────
+const storeCategories = [
+  { id: 'perfumes', nameAr: 'العطور الفاخرة',         nameEn: 'Luxury Perfumes',           icon: 'ri-water-flash-line' },
+  { id: 'incense',  nameAr: 'البخور الملكي',          nameEn: 'Royal Incense',             icon: 'ri-fire-line' },
+  { id: 'giftsets', nameAr: 'مجموعات الهدايا',        nameEn: 'Curated Gift Sets',         icon: 'ri-gift-2-line' },
+  { id: 'musk',     nameAr: 'المسك والدهن الحصري',    nameEn: 'Exclusive Musk & Essence',  icon: 'ri-vip-diamond-line' },
+];
+
+// ─────────────────────────────────────────────────────────────
 // FAQ DATA
 // ─────────────────────────────────────────────────────────────
 const faqData = [
@@ -114,7 +124,7 @@ const T = {
   ar: {
     announcementText:   'توصيل ملكي مجاني ومؤمن لجميع المحافظات العراقية',
     navHome:            'الرئيسية',
-    navCollections:     'المجموعة الكاملة',
+    navCollections:     'المنتجات',
     navStory:           'قصتنا',
     navCheckout:        'إتمام الطلب',
     heroSubtitle:       'تأسست عام ٢٠٢٢ — رمز الرقي والأصالة',
@@ -203,7 +213,7 @@ const T = {
   en: {
     announcementText:   'Complimentary royal insured shipping across all Iraqi governorates',
     navHome:            'Home',
-    navCollections:     'All Collections',
+    navCollections:     'Products',
     navStory:           'Our Story',
     navCheckout:        'Checkout',
     heroSubtitle:       'Established 2022 — The Icon of Prestige & Authenticity',
@@ -294,6 +304,7 @@ const T = {
 // Expose globally for app.js
 window.images = images;
 window.platformProducts = platformProducts;
+window.storeCategories = storeCategories;
 window.faqData = faqData;
 window.testimonialsData = testimonialsData;
 window.T = T;
