@@ -829,16 +829,20 @@ ul, ol { list-style: none; }
   aspect-ratio: 1/1;
   overflow: hidden;
   background: linear-gradient(160deg, #1f1e1b 0%, #161412 50%, #0f0e0c 100%);
+  margin-bottom: -1px; /* Sub-pixel bleed fix: seal the gap with text container */
+  transform: translateZ(0); /* Hardware acceleration */
+  backface-visibility: hidden;
 }
 .product-img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   will-change: transform;
-  transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1) translateZ(0);
+  backface-visibility: hidden;
   transition: transform 0.8s var(--ease-lux);
 }
-.product-card:hover .product-img-wrap img { transform: scale3d(1.06, 1.06, 1); }
+.product-card:hover .product-img-wrap img { transform: scale3d(1.06, 1.06, 1) translateZ(0); }
 
 .product-img-wrap::after {
   content: '';
