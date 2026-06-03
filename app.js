@@ -79,7 +79,7 @@ const testimonialsData = [
   {
     nameAr: 'أحمد الجبوري', nameEn: 'Ahmed Al-Jubouri',
     locAr: 'بغداد، المنصور', locEn: 'Baghdad, Al-Mansour',
-    textAr: 'عطر الروز البغدادي أخذني لعالم ثاني. ثبات وفخامة غير طبيعية، والباكجنك وحده تحفة فنية. فعلاً روز بغداد اسم على مسمى.',
+    textAr: 'عطر الروز البغدادي أخذني لعالم ثاني. ثبات وفخامة غير طبيعية، والتغليف وحده تحفة فنية. فعلاً روز بغداد اسم على مسمى.',
     textEn: 'Royal Baghdadi Rose took me to another world. Unnatural longevity and luxury, and the packaging itself is a masterpiece.',
     rating: 5
   },
@@ -93,7 +93,7 @@ const testimonialsData = [
   {
     nameAr: 'مصطفى العراقي', nameEn: 'Mustafa Al-Iraqi',
     locAr: 'أربيل', locEn: 'Erbil',
-    textAr: 'البخور الأزرق الفاخر غيّر جو البيت بالكامل. رائحة صافية بدون أي ريحة حرك، ثباته بالديوانية يظل لأيام. خدمة التوصيل كانت سريعة جداً.',
+    textAr: 'البخور الأزرق الفاخر غيّر جو البيت بالكامل. رائحة صافية بدون أي رائحة حرق، ثباته بالديوانية يظل لأيام. خدمة التوصيل كانت سريعة جداً.',
     textEn: 'The Premium Blue Incense completely changed the house vibe. Pure scent with no burning smell, lasts for days. Delivery was very fast.',
     rating: 4.8
   }
@@ -146,7 +146,7 @@ const T = {
     womenEyebrow:       'للمرأة الأنيقة',
     womenTitle:         'أناقة تُلهم الذاكرة',
     womenF1:            'ورد طائفي ودمشقي بتركيزات عالية',
-    womenF2:            'مسك أبيض يأمر بالنعومة والدفء',
+    womenF2:            'مسك أبيض يغمرك بالنعومة والدفء',
     womenF3:            'تغليف مخملي يليق بالهدايا الفاخرة',
     shopNow:            'تسوق الآن',
     reviewsEyebrow:     'آراء عملائنا',
@@ -482,6 +482,7 @@ function applySliderLogic(track, autoPlay = false) {
   let startX;
   let scrollLeft;
   let autoRafId;
+  let resumeTimeout;
   let speed = document.dir === 'rtl' ? -0.5 : 0.5;
 
   const getX = e => e.type.includes('touch') ? e.touches[0].pageX : e.pageX;
@@ -496,12 +497,12 @@ function applySliderLogic(track, autoPlay = false) {
   track.addEventListener('mouseleave', () => {
     isDown = false;
     track.classList.remove('dragging');
-    if (autoPlay) startAutoPlay();
+    scheduleAutoPlay();
   });
   track.addEventListener('mouseup', () => {
     isDown = false;
     track.classList.remove('dragging');
-    if (autoPlay) startAutoPlay();
+    scheduleAutoPlay();
   });
   track.addEventListener('mousemove', e => {
     if (!isDown) return;
@@ -513,10 +514,18 @@ function applySliderLogic(track, autoPlay = false) {
 
   // Touch Events for mobile
   track.addEventListener('touchstart', () => { cancelAutoPlay(); }, {passive: true});
-  track.addEventListener('touchend', () => { if (autoPlay) startAutoPlay(); }, {passive: true});
+  track.addEventListener('touchend', () => { scheduleAutoPlay(); }, {passive: true});
 
   // Hover Pause
   track.addEventListener('mouseenter', cancelAutoPlay);
+
+  function scheduleAutoPlay() {
+    if (!autoPlay) return;
+    clearTimeout(resumeTimeout);
+    resumeTimeout = setTimeout(() => {
+      startAutoPlay();
+    }, 2500);
+  }
 
   function startAutoPlay() {
     cancelAutoPlay();
@@ -535,6 +544,7 @@ function applySliderLogic(track, autoPlay = false) {
   }
 
   function cancelAutoPlay() {
+    clearTimeout(resumeTimeout);
     if (autoRafId) cancelAnimationFrame(autoRafId);
     autoRafId = null;
   }

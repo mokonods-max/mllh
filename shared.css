@@ -784,7 +784,6 @@ ul, ol { list-style: none; }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
   cursor: grab;
   padding-bottom: 12px;
   /* GPU scrolling */
@@ -1065,6 +1064,7 @@ ul, ol { list-style: none; }
   position: fixed;
   top: 0; bottom: 0;
   right: 0;
+  height: 100dvh;
   width: min(460px, 100vw);
   z-index: 200;
   background: rgba(8, 7, 6, 0.96);
@@ -1135,7 +1135,7 @@ ul, ol { list-style: none; }
 }
 .btn-close-cart:hover { color: var(--c-cream); }
 
-.cart-items { flex: 1; overflow-y: auto; padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px); }
+.cart-items { flex: 1; min-height: 0; overflow-y: auto; padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 32px); }
 
 .cart-item {
   display: flex;
