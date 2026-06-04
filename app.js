@@ -41,7 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
       initDynamicShowcase();
       renderTestimonials();
       renderFAQ();
-      navigateTo('home');
+      
+      const initialRoute = history.state?.route || 'home';
+      isPopState = true; // Temporarily bypass pushState on initial load
+      if (initialRoute === 'pdp' && history.state?.productId) {
+        const p = STATE.products.find(item => item.id === history.state.productId);
+        if (p) {
+          STATE.currentPdpProduct = p;
+          STATE.pdpQuantity = 1;
+          renderPDP(p.id);
+        }
+      }
+      navigateTo(initialRoute);
+      isPopState = false;
     });
   }, 100);
 });
@@ -108,18 +120,80 @@ function applyTranslations() {
 // ─────────────────────────────────────────────────────────────
 // SPA ROUTER (Zero CLS implementation)
 // ─────────────────────────────────────────────────────────────
+let isPopState = false;
+let spaNavigationCount = 0;
+
 function initRouter() {
+  const hash = window.location.hash;
+  let initialRoute = 'home';
+  let initialProductId = null;
+
+  if (hash.startsWith('#product-')) {
+    initialRoute = 'pdp';
+    initialProductId = hash.replace('#product-', '');
+  } else if (hash.startsWith('#pdp/')) {
+    initialRoute = 'pdp';
+    initialProductId = hash.replace('#pdp/', '');
+  } else if (hash.length > 1) {
+    initialRoute = hash.substring(1);
+  }
+
+  if (!history.state) {
+    if (initialRoute === 'pdp') {
+      history.replaceState({ view: 'product', productId: initialProductId }, '', '#product-' + initialProductId);
+    } else {
+      history.replaceState({ route: initialRoute, productId: null }, '', '#' + initialRoute);
+    }
+  }
+
   document.addEventListener('click', e => {
     const el = e.target.closest('[data-route]');
     if (!el) return;
     e.preventDefault();
     navigateTo(el.getAttribute('data-route'));
   });
+
+  window.addEventListener('popstate', e => {
+    isPopState = true;
+    if (e.state) {
+      if (e.state.view === 'product' && e.state.productId) {
+        const p = STATE.products.find(item => item.id === e.state.productId);
+        if (p) {
+          STATE.currentPdpProduct = p;
+          STATE.pdpQuantity = 1;
+          renderPDP(p.id);
+          navigateTo('pdp');
+        }
+      } else if (e.state.route === 'pdp' && e.state.productId) {
+        const p = STATE.products.find(item => item.id === e.state.productId);
+        if (p) {
+          STATE.currentPdpProduct = p;
+          STATE.pdpQuantity = 1;
+          renderPDP(p.id);
+          navigateTo('pdp');
+        }
+      } else if (e.state.route) {
+        navigateTo(e.state.route);
+      } else {
+        navigateTo('home');
+      }
+    } else {
+      navigateTo('home');
+    }
+    isPopState = false;
+  });
 }
 
 function navigateTo(route) {
-  if (STATE.currentRoute === route && route !== 'home') return;
+  const isSameRoute = STATE.currentRoute === route;
   STATE.currentRoute = route;
+
+  if (!isPopState) {
+    if (route !== 'pdp' && !isSameRoute) {
+      history.pushState({ route: route, productId: null }, '', '#' + route);
+      spaNavigationCount++;
+    }
+  }
 
   // Hide all
   document.querySelectorAll('.page-view').forEach(v => {
@@ -131,7 +205,6 @@ function navigateTo(route) {
   const target = document.getElementById(`view-${route}`);
   if (target) {
     target.style.display = 'block';
-    // Double-rAF ensures display:block applies before opacity transition starts
     requestAnimationFrame(() => requestAnimationFrame(() => target.classList.add('active')));
   }
 
@@ -143,6 +216,10 @@ function navigateTo(route) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   const mm = document.getElementById('mobileMenu');
   if (mm && mm.classList.contains('open')) window.closeMobileMenu();
+}
+
+function handlePdpBack() {
+  window.history.back();
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -518,13 +595,20 @@ function renderTestimonials() {
 // ─────────────────────────────────────────────────────────────
 // PDP (PRODUCT DETAIL PAGE)
 // ─────────────────────────────────────────────────────────────
-function openPDP(productId) {
-  const p = STATE.products.find(item => item.id === productId);
+function openPDP(id) {
+  const p = STATE.products.find(item => item.id === id);
   if (!p) return;
   STATE.currentPdpProduct = p;
   STATE.pdpQuantity = 1;
-  renderPDP(productId);
+  renderPDP(id);
+
+  // EXACT LOGIC REQUIRED: Explicitly inject real pure JS logic into the product card component
+  window.history.pushState({ view: 'product', productId: id }, '', '#product-' + id);
+  spaNavigationCount++;
+  
+  isPopState = true; // Prevent duplicate push in navigateTo
   navigateTo('pdp');
+  isPopState = false;
 }
 
 function renderPDP(productId) {
@@ -835,3 +919,4 @@ window.navigateTo         = navigateTo;
 window.openPDP            = openPDP;
 window.openPolicy         = openPolicy;
 window.closePolicy        = closePolicy;
+window.handlePdpBack      = handlePdpBack;
